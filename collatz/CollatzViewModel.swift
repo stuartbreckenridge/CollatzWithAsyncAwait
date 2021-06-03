@@ -50,39 +50,32 @@ class CollatzViewModel: ObservableObject {
         
     @MainActor
     private func toggleLoading() {
-        print(#function, "Started")
         isLoading.toggle()
-        print(#function, "Finished")
     }
     
     @MainActor
     private func publishCollatz(_ collatz: [Int: [Int]]) {
-        print(#function, "Started")
         collatzResults = collatz.sorted(by: { $0.key < $1.key})
-        print(#function, "Finished")
     }
     
     @MainActor
     private func publishProgress(_ progress: Float) {
-        print(#function, "Started")
         loadingPercent = progress
-        print(#function, "Finished")
     }
     
     private func collatz() async -> [Int: [Int]] {
-        print(#function, "Started")
         let sequence = Task { () -> [Int: [Int]]  in
             var collatzSequences = [Int: [Int]]()
             for i in (1...selectedCount.value).reversed() {
                 collatzSequences[i] = await generateCollatzSequence(start: i)
                 let progress = Float(selectedCount.value - i)/Float(selectedCount.value)
+                //await publishProgress(progress) // This is very slow.
                 DispatchQueue.main.async {
                     self.loadingPercent = progress
                 }
             }
             return collatzSequences
         }
-        print(#function, "Finished")
         return await sequence.value
     }
     
