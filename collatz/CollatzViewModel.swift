@@ -56,14 +56,14 @@ class CollatzViewModel: ObservableObject {
     }
     
     @MainActor
-    func publishCollatz(_ collatz: [Int: [Int]]) {
+    private func publishCollatz(_ collatz: [Int: [Int]]) {
         print(#function, "Started")
         collatzResults = collatz.sorted(by: { $0.key < $1.key})
         print(#function, "Finished")
     }
     
     @MainActor
-    func publishProgress(_ progress: Float) {
+    private func publishProgress(_ progress: Float) {
         print(#function, "Started")
         loadingPercent = progress
         print(#function, "Finished")
