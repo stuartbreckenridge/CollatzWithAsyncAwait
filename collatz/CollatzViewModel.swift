@@ -13,7 +13,7 @@ public enum CollatzCount: CaseIterable, Identifiable {
         value
     }
     
-    case oneHundred, oneThousand, tenThousand, fiftyThousand, oneHundredThousand
+    case oneHundred, oneThousand, tenThousand, fiftyThousand, oneHundredThousand, oneMillion
     
     var value: Int {
         switch self {
@@ -27,6 +27,8 @@ public enum CollatzCount: CaseIterable, Identifiable {
             return 50000
         case .oneHundredThousand:
             return 100000
+        case .oneMillion:
+            return 1000000
         }
     }
     

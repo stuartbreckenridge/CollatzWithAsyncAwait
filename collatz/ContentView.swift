@@ -36,7 +36,7 @@ struct ContentView: View {
                                         })
                                     })
                                     Button(action: {
-                                            model.collatzResults.removeAll()
+                                        model.collatzResults.removeAll()
                                     }, label: {
                                         Text("Clear")
                                     })
